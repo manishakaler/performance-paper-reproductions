@@ -1,0 +1,7 @@
+{"type":"startup","time":1778114475749256605}
+{"type":"experiment","selected":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:51","speedup":0.55,"duration":500062295,"selected_samples":0}
+{"type":"throughput-point","name":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:51","delta":20}
+{"type":"runtime","time":26488610064}
+{"type":"samples","location":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:51","count":1}
+{"type":"startup","time":1778114536315237972}
+{"type":"runtime","time":9720413063}

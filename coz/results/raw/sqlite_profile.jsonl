@@ -1,0 +1,8 @@
+{"type":"startup","time":1778112600797075341}
+{"type":"experiment","selected":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:51","speedup":0.40,"duration":500065911,"selected_samples":0}
+{"type":"throughput-point","name":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:51","delta":109}
+{"type":"experiment","selected":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:49","speedup":0.35,"duration":500077302,"selected_samples":0}
+{"type":"throughput-point","name":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:51","delta":109}
+{"type":"runtime","time":9472351936}
+{"type":"samples","location":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:49","count":1}
+{"type":"samples","location":"/nfs/elsrv4/users3/grad/manishamanis/cs690pf/project-manishakaler-1/coz/src/sqlite_bench.c:51","count":1}
