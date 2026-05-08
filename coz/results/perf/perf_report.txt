@@ -1,0 +1,60 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 978K of event 'cycles'
+# Event count (approx.): 116066121226
+#
+# Overhead  Shared Object         Symbol                                 IPC   [IPC Coverage]
+# ........  ....................  .....................................  ....................
+#
+     8.24%  [unknown]             [k] 0xffffffff85c0021e                 -      -            
+     5.87%  libsqlite3_custom.so  [.] sqlite3VdbeExec                    -      -            
+     3.01%  libc.so.6             [.] pthread_mutex_lock@@GLIBC_2.2.5    -      -            
+     2.21%  libsqlite3_custom.so  [.] memjrnlWrite                       -      -            
+     2.18%  [unknown]             [k] 0xffffffff85c0009d                 -      -            
+     2.17%  libc.so.6             [.] pthread_mutex_unlock@@GLIBC_2.2.5  -      -            
+     1.84%  [unknown]             [k] 0xffffffff85c00213                 -      -            
+     1.49%  libc.so.6             [.] __GI___lll_lock_wait               -      -            
+     1.28%  libsqlite3_custom.so  [.] sqlite3VdbeHalt                    -      -            
+     1.16%  libsqlite3_custom.so  [.] sqlite3PcacheFetch                 -      -            
+     1.13%  libsqlite3_custom.so  [.] sqlite3DbFree                      -      -            
+     1.12%  [unknown]             [k] 0xffffffff85be704c                 -      -            
+     1.10%  libsqlite3_custom.so  [.] pcache1Fetch                       -      -            
+     1.02%  libsqlite3_custom.so  [.] sqlite3PagerAcquire                -      -            
+     1.00%  libsqlite3_custom.so  [.] vdbeUnbind                         -      -            
+     0.99%  libsqlite3_custom.so  [.] sqlite3Error                       -      -            
+     0.95%  libc.so.6             [.] _int_free                          -      -            
+     0.90%  libsqlite3_custom.so  [.] pager_write                        -      -            
+     0.85%  libsqlite3_custom.so  [.] sqlite3BtreeBeginTrans             -      -            
+     0.84%  libsqlite3_custom.so  [.] sqlite3_free                       -      -            
+     0.83%  libc.so.6             [.] malloc                             -      -            
+     0.83%  [unknown]             [k] 0xffffffff85c00225                 -      -            
+     0.82%  [unknown]             [k] 0xffffffff84f93ee9                 -      -            
+     0.75%  libsqlite3_custom.so  [.] releaseMemArray.part.0             -      -            
+     0.72%  libsqlite3_custom.so  [.] sqlite3VdbeSerialType              -      -            
+     0.71%  libsqlite3_custom.so  [.] sqlite3_step                       -      -            
+     0.69%  libc.so.6             [.] __memset_avx2_unaligned_erms_rtm   -      -            
+     0.64%  libsqlite3_custom.so  [.] mallocWithAlarm                    -      -            
+     0.63%  libsqlite3_custom.so  [.] sqlite3VdbeMemSetNull              -      -            
+     0.63%  [unknown]             [k] 0xffffffff84e9cf44                 -      -            
+     0.62%  libsqlite3_custom.so  [.] sqlite3_randomness                 -      -            
+     0.60%  [unknown]             [k] 0xffffffff84f420a6                 -      -            
+     0.60%  libsqlite3_custom.so  [.] sqlite3BtreeInsert                 -      -            
+     0.56%  libc.so.6             [.] cfree@GLIBC_2.2.5                  -      -            
+     0.55%  [unknown]             [k] 0xffffffff85c000a0                 -      -            
+     0.54%  [unknown]             [k] 0xffffffff84f420a4                 -      -            
+     0.53%  [unknown]             [k] 0xffffffff84f04257                 -      -            
+     0.50%  [unknown]             [k] 0xffffffff85c00216                 -      -            
+     0.48%  libsqlite3_custom.so  [.] btreeGetPage                       -      -            
+     0.48%  [unknown]             [k] 0xffffffff85460c19                 -      -            
+     0.46%  libsqlite3_custom.so  [.] allocateCursor                     -      -            
+     0.45%  libsqlite3_custom.so  [.] insertCell                         -      -            
+     0.44%  libsqlite3_custom.so  [.] sqlite3_clear_bindings             -      -            
+     0.43%  libsqlite3_custom.so  [.] sqlite3_bind_int64                 -      -            
+     0.41%  libsqlite3_custom.so  [.] sqlite3PagerUnref                  -      -            
+     0.40%  [unknown]             [k] 0xffffffff84f94c55                 -      -            
+     0.39%  libsqlite3_custom.so  [.] sqlite3Malloc                      -      -            
+     0.39%  libsqlite3_custom.so  [.] sqlite3VdbeMemSetStr               -      -            
+     0.37%  [unknown]             [k] 0xffffffff84f41f9f                 -      -            
