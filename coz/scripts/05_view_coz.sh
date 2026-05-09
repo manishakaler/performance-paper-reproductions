@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #
-# Open the Coz viewer on a profile. Prints both the browser-UI command
-# (if you can port-forward) and the text-mode dump.
+# Open the Coz viewer on a profile.
 #
 set -euo pipefail
 cd "$(dirname "$0")/.."

@@ -11,11 +11,10 @@
 # Reference: Curtsinger & Berger, "Coz: Finding Code that Counts with
 # Causal Profiling," SOSP 2015, section 5.1.
 #
-# Idempotent. Saves a backup of the unpatched file at
-# sqlite3.c.before_mutex_patch on first apply. Revert with
+# Note: A backup of the unpatched file at
+# sqlite3.c. is saved before_mutex_patch on first apply. Revert with
 # scripts/11_revert_mutex_patch.sh.
 #
-# Implementation: literal-string replacement via python3, no regex.
 #
 # Usage:
 #   scripts/10_patch_mutex.sh
@@ -31,14 +30,14 @@ if [ ! -f "$SRC" ]; then
     exit 1
 fi
 
-# Idempotency: detect patch by its unique comment signature.
+
 SIGNATURE='Coz fast path: skip pthread_mutex_lock'
 if grep -qF "$SIGNATURE" "$SRC"; then
     echo "Mutex patch already applied (signature found in $SRC)."
     exit 0
 fi
 
-# Save backup (only on first apply).
+# Save backup
 if [ ! -f "$BAK" ]; then
     cp "$SRC" "$BAK"
     echo "Saved backup: $BAK"

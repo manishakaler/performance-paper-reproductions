@@ -2,10 +2,6 @@
 #
 # Run Coz on the benchmark.
 #
-# KEY DETAIL: by default Coz only profiles lines in the MAIN executable.
-# We need it to also profile lines inside libsqlite3_custom.so (where the
-# pthread mutex code lives). That's what --binary-scope and --source-scope
-# do below.
 #
 # A profile.jsonl is written to results/coz/. Re-run from the repo root
 # so the viewer can resolve src/sqlite_bench.c and sqlite3.c paths.

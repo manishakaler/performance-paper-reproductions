@@ -5,7 +5,7 @@
 # Applies the second source-level optimization to SQLite 3.7.17:
 # bump the in-memory journal chunk size from 1 KB to 8 KB.
 #
-# Background:
+# Context:
 #   Coz's profile of the unpatched baseline (results/coz/profile_baseline.jsonl)
 #   identified line 73610 of sqlite3.c -- a sqlite3_malloc(sizeof(FileChunk))
 #   call inside memjrnlWrite -- as the strongest candidate causal bottleneck:
@@ -19,13 +19,10 @@
 #   without changing the allocator's bin selection (8 KB stays within
 #   glibc's small-bin path, well below the mmap threshold).
 #
-# Idempotent: re-running this script after it has already been applied is a
+# Note: re-running this script after it has already been applied is a
 # no-op. A backup of the unmodified file is kept at sqlite3.c.before_chunk_patch
 # so the change can be reverted with scripts/09_revert_chunk_patch.sh.
 #
-# Implementation note: the replacement is done via python3 rather than sed
-# so we don't have to escape regex metacharacters (*, parens) in the
-# matched string.
 #
 # Usage:
 #   scripts/08_patch_chunk_size.sh

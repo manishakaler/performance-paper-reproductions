@@ -8,13 +8,6 @@
 # This is symmetric with 08_*; running 08 then 09 should leave sqlite3.c
 # byte-identical to its pre-08 state.
 #
-# Note: if you also applied the mutex fast-path patch by hand (per
-# PATCH_MINIMAL.diff), this script does NOT revert that. The mutex patch
-# was applied directly to sqlite3.c; the only safe way to revert it is
-# to re-fetch a clean amalgamation:
-#     rm -rf third_party/sqlite-3.7.17
-#     scripts/01_fetch_sqlite.sh
-#
 # Usage:
 #   scripts/09_revert_chunk_patch.sh
 #

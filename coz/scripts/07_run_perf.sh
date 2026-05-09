@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 #
-# Conventional-profiler comparison the assignment requires.
-#
 # Records a perf profile of the same benchmark and dumps the top symbols
-# so you can compare what perf points at vs. what Coz points at.
+# to compare what perf points at vs. what Coz points at.
 #
-# perf_event_paranoid is 0 on elnux per your environment, so this should
-# work without sudo.
 #
 set -euo pipefail
 cd "$(dirname "$0")/.."

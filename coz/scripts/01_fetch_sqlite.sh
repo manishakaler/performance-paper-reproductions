@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 #
-# Fetch SQLite 3.7.17 amalgamation (released 2013-05-20). This is the
-# version contemporary with the Coz paper. Newer SQLite has already
-# absorbed the paper's mutex fast-path optimization, so reproducing the
-# bottleneck requires using a pre-fix version.
+# Fetch SQLite 3.7.17
 #
 set -euo pipefail
 cd "$(dirname "$0")/.."

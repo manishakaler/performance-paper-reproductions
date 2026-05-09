@@ -7,13 +7,6 @@
  * connection. Every successful insert advances a single external progress
  * point. No COZ_PROGRESS_NAMED inside sqlite3.c.
  *
- * Why this design (vs. per-thread DBs):
- *   With SQLITE_THREADSAFE=1, all API calls on a shared connection are
- *   serialized through that connection's recursive mutex. The paper found
- *   that the cost of acquiring/releasing this mutex on every sqlite3 API
- *   call was the dominant bottleneck. To reproduce that, we have to put
- *   real traffic through that mutex. Per-thread connections (the variant
- *   used previously) bypass it.
  */
 
 #include <pthread.h>

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Build the benchmark, linking against the freshly built libsqlite3_custom.so.
+# Build the benchmark, linking against the libsqlite3_custom.so.
 # Output: results/raw/bin/sqlite_bench
 #
 set -euo pipefail

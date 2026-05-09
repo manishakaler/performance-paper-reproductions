@@ -4,11 +4,11 @@
 # pointers so Coz can resolve source lines inside it.
 #
 # Critical flags:
-#   -g                          debug info (Coz needs it for line resolution)
+#   -g                          debug info 
 #   -fno-omit-frame-pointer     accurate stack walks
 #   -O2                         realistic optimization level
 #   -fPIC + -shared             produces libsqlite3_custom.so
-#   -DSQLITE_THREADSAFE=1       serialized mode -- this is what makes the
+#   -DSQLITE_THREADSAFE=1       serialized mode -- makes the
 #                               recursive connection mutex hot, which is
 #                               what the paper exploits.
 #
