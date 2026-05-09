@@ -1,0 +1,3 @@
+--2059337-- warning: L3 cache found, using its data for the LL simulation.
+--2059337-- warning: specified LL cache: line_size 64  assoc 20  total_size 26,214,400
+--2059337-- warning: simulated LL cache: line_size 64  assoc 25  total_size 26,214,400

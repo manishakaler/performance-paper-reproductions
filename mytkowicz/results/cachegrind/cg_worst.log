@@ -1,0 +1,25 @@
+==2071500== Cachegrind, a cache and branch-prediction profiler
+==2071500== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==2071500== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2071500== Command: results/raw/bin/sqlite_bench_small
+==2071500== 
+--2071500-- warning: L3 cache found, using its data for the LL simulation.
+--2071500-- warning: specified LL cache: line_size 64  assoc 20  total_size 26,214,400
+--2071500-- warning: simulated LL cache: line_size 64  assoc 25  total_size 26,214,400
+threads=4 ops_per_thread=25000 total=100000 elapsed=12.862527s throughput=7775 ops/s
+==2071500== 
+==2071500== I   refs:      1,151,788,960
+==2071500== I1  misses:       27,540,872
+==2071500== LLi misses:            4,320
+==2071500== I1  miss rate:          2.39%
+==2071500== LLi miss rate:          0.00%
+==2071500== 
+==2071500== D   refs:        560,949,910  (356,411,530 rd   + 204,538,380 wr)
+==2071500== D1  misses:          107,576  (     42,074 rd   +      65,502 wr)
+==2071500== LLd misses:           48,242  (      2,360 rd   +      45,882 wr)
+==2071500== D1  miss rate:           0.0% (        0.0%     +         0.0%  )
+==2071500== LLd miss rate:           0.0% (        0.0%     +         0.0%  )
+==2071500== 
+==2071500== LL refs:          27,648,448  ( 27,582,946 rd   +      65,502 wr)
+==2071500== LL misses:            52,562  (      6,680 rd   +      45,882 wr)
+==2071500== LL miss rate:            0.0% (        0.0%     +         0.0%  )

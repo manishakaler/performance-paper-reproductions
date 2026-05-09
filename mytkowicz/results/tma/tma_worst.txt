@@ -1,0 +1,32 @@
+# Layout: padding=1536 bytes
+# Command: perf stat -M Frontend_Bound,Backend_Bound,Bad_Speculation,Retiring -- results/raw/bin/sqlite_bench_small
+
+threads=4 ops_per_thread=25000 total=100000 elapsed=0.515871s throughput=193847 ops/s
+4	25000	100000	0.515871	193847
+threads=4 ops_per_thread=25000 total=100000 elapsed=0.676204s throughput=147884 ops/s
+4	25000	100000	0.676204	147884
+threads=4 ops_per_thread=25000 total=100000 elapsed=0.690572s throughput=144808 ops/s
+4	25000	100000	0.690572	144808
+threads=4 ops_per_thread=25000 total=100000 elapsed=0.513039s throughput=194917 ops/s
+4	25000	100000	0.513039	194917
+threads=4 ops_per_thread=25000 total=100000 elapsed=0.580771s throughput=172185 ops/s
+4	25000	100000	0.580771	172185
+
+ Performance counter stats for 'setarch -R results/raw/bin/sqlite_bench_small' (5 runs):
+
+        1690373074      cycles                                                      
+                                                  #     0.31 Frontend_Bound           ( +-  2.22% )  (51.18%)
+        2044824170      idq_uops_not_delivered.core                                     ( +-  2.82% )  (51.18%)
+     <not counted>      uops_issued.any                                               (0.00%)
+     <not counted>      cycles                                                        (0.00%)
+     <not counted>      idq_uops_not_delivered.core                                     (0.00%)
+     <not counted>      int_misc.recovery_cycles                                      (0.00%)
+     <not counted>      uops_retired.retire_slots                                     (0.00%)
+
+            0.5997 +- 0.0379 seconds time elapsed  ( +-  6.32% )
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog
+The events in group usually have to be from the same PMU. Try reorganizing the group.
