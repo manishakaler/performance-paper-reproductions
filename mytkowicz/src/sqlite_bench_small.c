@@ -1,0 +1,123 @@
+/*
+ * sqlite_bench_small.c
+ *
+ * Small CPU-bound SQLite workload used for the layout-sensitivity
+ * reproduction 
+ * 
+ *
+ * Build:
+ *   gcc -O2 -g -fno-omit-frame-pointer -pthread \
+ *       -I third_party/sqlite-3.7.17 \
+ *       src/sqlite_bench_small.c \
+ *       -L build-custom -lsqlite3_custom \
+ *       -o results/raw/bin/sqlite_bench_small \
+ *       -ldl
+ *
+ * Run (with environment-variable padding for layout shift):
+ *   PADDING=$(printf 'A%.0s' $(seq 1 1024)) \
+ *       setarch -R results/raw/bin/sqlite_bench_small
+ */
+#include <pthread.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+#include <sqlite3.h>
+
+#ifndef THREAD_COUNT
+#define THREAD_COUNT 4
+#endif
+
+#ifndef OPS_PER_THREAD
+#define OPS_PER_THREAD 25000
+#endif
+
+static sqlite3 *g_db = NULL;
+
+static void die(const char *what, const char *msg) {
+    fprintf(stderr, "%s: %s\n", what, msg ? msg : "(null)");
+    exit(1);
+}
+
+static void *worker(void *arg) {
+    long tid = (long)arg;
+    sqlite3_stmt *stmt = NULL;
+
+    if (sqlite3_prepare_v2(g_db,
+            "INSERT INTO t(tid, x, y, z) VALUES (?1, ?2, ?3, ?4)",
+            -1, &stmt, NULL) != SQLITE_OK) {
+        die("prepare", sqlite3_errmsg(g_db));
+    }
+
+    for (int i = 0; i < OPS_PER_THREAD; i++) {
+        sqlite3_bind_int(stmt, 1, (int)tid);
+        sqlite3_bind_int(stmt, 2, 2 * i);
+        sqlite3_bind_int(stmt, 3, 3 * i);
+        sqlite3_bind_text(stmt, 4, "asdf", -1, SQLITE_STATIC);
+
+        int rc;
+        do { rc = sqlite3_step(stmt); } while (rc == SQLITE_BUSY);
+        if (rc != SQLITE_DONE) die("step", sqlite3_errmsg(g_db));
+
+        sqlite3_reset(stmt);
+        sqlite3_clear_bindings(stmt);
+    }
+
+    sqlite3_finalize(stmt);
+    return NULL;
+}
+
+int main(void) {
+    if (sqlite3_threadsafe() == 0) {
+        fprintf(stderr, "FATAL: libsqlite3 was built with SQLITE_THREADSAFE=0.\n");
+        return 1;
+    }
+
+    sqlite3_config(SQLITE_CONFIG_SERIALIZED);
+
+    if (sqlite3_open(":memory:", &g_db) != SQLITE_OK) {
+        die("open", sqlite3_errmsg(g_db));
+    }
+
+    char *err = NULL;
+    if (sqlite3_exec(g_db,
+            "PRAGMA journal_mode = MEMORY;"
+            "PRAGMA synchronous = OFF;"
+            "PRAGMA temp_store = MEMORY;"
+            "CREATE TABLE t(id INTEGER PRIMARY KEY, tid INT, x INT, y INT, z TEXT);",
+            NULL, NULL, &err) != SQLITE_OK) {
+        fprintf(stderr, "setup: %s\n", err);
+        sqlite3_free(err);
+        return 1;
+    }
+
+    struct timespec t0, t1;
+    clock_gettime(CLOCK_MONOTONIC, &t0);
+
+    pthread_t th[THREAD_COUNT];
+    for (long i = 0; i < THREAD_COUNT; i++) {
+        if (pthread_create(&th[i], NULL, worker, (void *)i) != 0) {
+            perror("pthread_create");
+            return 1;
+        }
+    }
+    for (int i = 0; i < THREAD_COUNT; i++) {
+        pthread_join(th[i], NULL);
+    }
+
+    clock_gettime(CLOCK_MONOTONIC, &t1);
+    double elapsed = (t1.tv_sec - t0.tv_sec) + (t1.tv_nsec - t0.tv_nsec) / 1e9;
+    long total = (long)THREAD_COUNT * OPS_PER_THREAD;
+
+    /* tab-separated for easy CSV scraping */
+    fprintf(stderr,
+        "threads=%d ops_per_thread=%d total=%ld elapsed=%.6fs throughput=%.0f ops/s\n",
+        THREAD_COUNT, OPS_PER_THREAD, total, elapsed, total / elapsed);
+    printf("%d\t%d\t%ld\t%.6f\t%.0f\n",
+        THREAD_COUNT, OPS_PER_THREAD, total, elapsed, total / elapsed);
+
+    sqlite3_close(g_db);
+    return 0;
+}
